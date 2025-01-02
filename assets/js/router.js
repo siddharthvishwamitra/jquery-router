@@ -9,8 +9,8 @@ const routes = {
 
 const titles = {
   home: 'Home Page',
-  about: 'About',
-  contact: 'Contact',
+  about: 'About Us',
+  contact: 'Contact Us',
   services: 'Our Services',
   blog: 'Blog',
   team: 'Our Team'
@@ -18,15 +18,19 @@ const titles = {
 
 const contentDiv = document.getElementById('content');
 let currentPage = '';
+let historyStack = []; // Track history stack for back navigation
 
 function loadContent(page) {
   if (page === currentPage) return;
-  const file = routes[page] || '/pages/home';
+  const file = `${routes[page]}`;
   fetch(file)
-    .then(response => response.ok ? response.text() : Promise.reject())
+    .then(response => {
+      if (!response.ok) throw new Error('Content not found');
+      return response.text();
+    })
     .then(html => {
       contentDiv.innerHTML = html;
-      bindDynamicLinks();
+      bindDynamicLinks(); // Bind dynamic links after content is loaded
       updateTitle(page);
       currentPage = page;
     })
@@ -34,9 +38,11 @@ function loadContent(page) {
 }
 
 function updateURL(page) {
-  const newUrl = (page === 'home') ? '/' : `/?${page}`;
-  if (window.location.pathname !== newUrl) {
-    history.pushState({ page }, titles[page], newUrl);
+  // Push the page to history stack for back navigation
+  if (page === 'home') {
+    history.pushState({ page: page }, titles[page], '/');
+  } else {
+    history.pushState({ page: page }, titles[page], `/?${page}`);
   }
 }
 
@@ -47,37 +53,50 @@ function updateTitle(page) {
 function handleRoute(route) {
   if (routes[route]) {
     loadContent(route);
+    historyStack.push(route); // Add the route to the history stack
     updateURL(route);
   } else {
     loadContent('home');
-    updateURL('home');
   }
 }
 
 function bindDynamicLinks() {
+  // Bind links for both main navigation and dynamically loaded content
   document.querySelectorAll('[data-link]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      handleRoute(link.getAttribute('data-link'));
+      const page = link.getAttribute('data-link');
+      handleRoute(page); // Load the page content into the content div
     });
   });
 
+  // Handle dynamic span-based links, like {about}
   document.querySelectorAll('span').forEach(el => {
-    const route = el.textContent.match(/{(.+?)}/)?.[1];
-    if (route) {
+    if (el.textContent.match(/{(.+?)}/)) {
+      const route = el.textContent.match(/{(.+?)}/)[1];
       el.style.cursor = 'pointer';
-      el.addEventListener('click', () => handleRoute(route));
+      el.addEventListener('click', () => {
+        handleRoute(route);
+      });
     }
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const page = new URLSearchParams(window.location.search).get('urlname') || 'home';
+window.addEventListener('load', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const page = urlParams.get('home') ? 'home' :
+    urlParams.get('about') ? 'about' :
+    urlParams.get('contact') ? 'contact' :
+    urlParams.get('services') ? 'services' :
+    urlParams.get('blog') ? 'blog' :
+    urlParams.get('team') ? 'team' : 'home';
   handleRoute(page);
 });
 
 window.addEventListener('popstate', (event) => {
   const page = event.state?.page || 'home';
-  loadContent(page);
-  currentPage = page;
+  if (page !== currentPage) {
+    loadContent(page);
+    currentPage = page;
+  }
 });
