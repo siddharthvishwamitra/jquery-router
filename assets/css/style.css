@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  font-family: "Inter", serif;
+  margin: 0;
+}
+
+nav {
+  background: skyblue;
+  padding: 8px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ffffff;
+  margin: 0 10px;
+}
+
+#content {
+  padding: 8px;
+}
+
+#content h2 {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 5px;
+}
+
+a {
+  text-decoration: underline;
+  color: #272727;
+}

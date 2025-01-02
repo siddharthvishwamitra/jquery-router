@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanilla Router Home</title>
-    <style>
-    * {
-      margin: 0;
-    }
-    nav {
-      background: skyblue;
-      padding: 8px;
-    }
-    nav a {
-      text-decoration: none;
-    }
-     #content {
-       padding: 8px;
-        }
-        a {
-            margin: 0 10px;
-            text-decoration: underline;
-            color: black;
-        }
-      #content h2 {
-        border-bottom: 1px solid #e8e8e8;
-        margin-bottom: 5px;
-      }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="#" data-link="about">About</a>
-        <a href="#" data-link="contact">Contact</a>
-    </nav>
-
-    <div id="content">Loading content...</div>
-
-  <script src="/assets/js/router.js"></script>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Vanilla Router Home</title>
+      <link rel="stylesheet" href="/assets/css/style.css">
+   </head>
+   <body>
+      <nav>
+         <a href="/">Home</a>
+         <a href="#" data-link="about">About</a>
+         <a href="#" data-link="contact">Contact</a>
+      </nav>
+      <div id="content">Loading content...</div>
+      <script src="/assets/js/router.js"></script>
+   </body>
 </html>
