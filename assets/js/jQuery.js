@@ -6,35 +6,36 @@ $(document).ready(function() {
   };
 
   const loadPage = (linkId, href) => {
-    if (pages[linkId] || Object.values(pages).includes(href)) {
-      $('#content').load(href || pages[linkId]);
+    if (linkId && href && pages[linkId] === href) {
+      $('#content').load(href);
       $('a').removeClass('active');
-      if (linkId) $(`#${linkId}`).addClass('active');
+      $(`#${linkId}`).addClass('active');
     }
   };
 
   const loadPageFromUrl = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    const linkId = queryParams.keys().next().value || 'home';
-    const page = pages[linkId] || pages['home'];
+    const linkId = queryParams.keys().next().value || 'home'; // Default to 'home'
+    const page = pages[linkId] || pages['home']; // Fallback to 'home' if linkId doesn't exist
 
-    $('#content').load(page);
+    $('#content').load(page); // Load the default or specific page
     $('a').removeClass('active');
     $(`#${linkId}`).addClass('active');
   };
 
-  loadPageFromUrl();
+  loadPageFromUrl(); // Load the appropriate page on initial load
 
   $(document).on('click', 'a', function(e) {
-    e.preventDefault();
     const href = $(this).attr('href');
-    const linkId = $(this).attr('id') || Object.keys(pages).find(key => pages[key] === href);
+    const linkId = $(this).attr('id');
 
-    if (href) {
-      history.pushState({ page: linkId || href }, '', `?${linkId || href}`);
-      loadPage(linkId, href);
+    if (linkId && href && pages[linkId]) {
+      e.preventDefault(); // Prevent default navigation
+      history.pushState({ page: linkId }, '', `?${linkId}`);
+      loadPage(linkId, href); // Load content dynamically
     }
+    // Let links without id behave normally
   });
 
-  window.onpopstate = loadPageFromUrl;
+  window.onpopstate = loadPageFromUrl; // Handle browser back/forward buttons
 });
