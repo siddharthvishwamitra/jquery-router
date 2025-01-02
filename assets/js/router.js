@@ -8,9 +8,9 @@ const routes = {
 };
 
 const titles = {
-  home: 'Home Page',
-  about: 'About Us',
-  contact: 'Contact Us',
+  home: 'Home',
+  about: 'About',
+  contact: 'Contact',
   services: 'Our Services',
   blog: 'Blog',
   team: 'Our Team'
