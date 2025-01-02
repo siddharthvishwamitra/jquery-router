@@ -1,0 +1,5 @@
+<h2>About</h2>
+<p>This is About</p>
+<p>Links within links</p>
+<p>Use anywhere: <a href="#" data-link="contact">Contact Page</a></p>
+<p>Use custom syntax: <span>{about}</span></p>
