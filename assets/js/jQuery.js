@@ -5,11 +5,18 @@ $(document).ready(function() {
     contact: '/jqp/contact',
   };
 
+  const pageTitles = {
+    home: 'jQuery Router',
+    about: 'About',
+    contact: 'Contact',
+  };
+
   const loadPage = (linkId) => {
     if (pages[linkId]) {
       $('#content').load(pages[linkId]);
       $('a').removeClass('active');
       $(`#${linkId}`).addClass('active');
+      document.title = pageTitles[linkId] || 'Default Title';
     }
   };
 
