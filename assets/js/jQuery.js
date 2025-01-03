@@ -5,9 +5,9 @@ $(document).ready(function() {
     contact: '/jqp/contact',
   };
 
-  const loadPage = (linkId, href) => {
-    if (linkId && href && pages[linkId] === href) {
-      $('#content').load(href);
+  const loadPage = (linkId) => {
+    if (pages[linkId]) {
+      $('#content').load(pages[linkId]);
       $('a').removeClass('active');
       $(`#${linkId}`).addClass('active');
     }
@@ -15,27 +15,20 @@ $(document).ready(function() {
 
   const loadPageFromUrl = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    const linkId = queryParams.keys().next().value || 'home'; // Default to 'home'
-    const page = pages[linkId] || pages['home']; // Fallback to 'home' if linkId doesn't exist
-
-    $('#content').load(page); // Load the default or specific page
-    $('a').removeClass('active');
-    $(`#${linkId}`).addClass('active');
+    const linkId = queryParams.keys().next().value || 'home';
+    loadPage(linkId);
   };
 
-  loadPageFromUrl(); // Load the appropriate page on initial load
+  loadPageFromUrl();
 
   $(document).on('click', 'a', function(e) {
-    const href = $(this).attr('href');
     const linkId = $(this).attr('id');
-
-    if (linkId && href && pages[linkId]) {
-      e.preventDefault(); // Prevent default navigation
+    if (linkId && pages[linkId]) {
+      e.preventDefault();
       history.pushState({ page: linkId }, '', `?${linkId}`);
-      loadPage(linkId, href); // Load content dynamically
+      loadPage(linkId);
     }
-    // Let links without id behave normally
   });
 
-  window.onpopstate = loadPageFromUrl; // Handle browser back/forward buttons
+  window.onpopstate = loadPageFromUrl;
 });
