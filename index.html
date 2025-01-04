@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Vanilla Router Home</title>
-      <link rel="stylesheet" href="/assets/css/style.css">
-   </head>
-   <body>
-     <header>
-      <nav>
-         <a href="/">Home</a>
-         <a href="#" data-link="about">About</a>
-         <a href="#" data-link="contact">Contact</a>
-      </nav>
-      </header>
-      <div id="content">Loading content...</div>
-      <center style="margin-top:10px;"><p>Try <a href="/jquery.html"> jQuery</a> Router. It's faster!</p></center>
-      <script src="/assets/js/router.js"></script>
-   </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery Router</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+  <header>
+    <nav id="nav">
+      <a id="home" href="#">Home</a>
+      <a id="about" href="#">About</a>
+      <a id="contact" href="#">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <div id="content">Loading...</div>
+  </main>
+  <script src="/assets/js/jQuery.js"></script>
+</body>
 </html>
