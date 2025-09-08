@@ -1,2 +1,2 @@
 <h2>Home</h2>
-<p>This is Home Page</p>
+<p>Welcome to the homepage of this single page application. This site is powered by a simple jQuery-based router, without any backend. All navigation between pages is handled on the client side to save bandwidth and avoid full reloads. The content you are reading is just dummy placeholder text for demonstration purposes. Use the menu to explore other sections of the site, such as About and Contact. Everything you see here is rendered instantly without refreshing the page. This example shows how lightweight a static frontend-only setup can be.</p>

@@ -1,3 +1,4 @@
-<h2>About</h2>
-<p>This is About Page</p>
-<p>Go anywhere: <a id="contact" href="#">contact</a></p>
+  <h2>About</h2>
+  <p>This is the About Page of the site.</p>
+  <p><img class="w-full image-shd" src="/assets/img/pic_trulli.jpg" alt="Trulli"></p>
+  <p>Go to: <a id="contact">Contact</a></p>
